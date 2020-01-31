@@ -87,8 +87,8 @@ const DBMutation = new GraphQLObjectType({
         addAuthor: {
             type: AuthorType,
             args: {
-                name: {type: GraphQLString},
-                age: {type: GraphQLID}
+                name: { type: GraphQLString },
+                age: { type: GraphQLID }
             },
             resolve(parent, args) {
                 let author = new Author({
@@ -96,6 +96,22 @@ const DBMutation = new GraphQLObjectType({
                     age: args.age
                 });
                 return author.save(); // Devuelve los datos insertados, sino devuelve null despues del insert.
+            }
+        },
+        addBook: {
+            type: BookType,
+            args: {
+                name: { type: GraphQLString },
+                genre: { type: GraphQLString },
+                authorId: { type: GraphQLID }
+            },
+            resolve(parent, args) {
+                let book = new Book({
+                    name: args.name,
+                    genre: args.genre,
+                    authorId: args.authorId
+                });
+                return book.save();
             }
         }
     }

@@ -6,5 +6,4 @@ const authorSchema = new Schema({
     age: Number
 });
 
-// Modelo o Coleccion "Book" que tendrá objetos del tipo bookSchema. 
 module.exports = mongoose.model('Author', authorSchema);
