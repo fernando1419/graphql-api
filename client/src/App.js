@@ -1,9 +1,11 @@
 import React from 'react';
+import BookList from './components/BookList';
 
 function App() {
   return (
     <div className="App">
-        <h1>Testing FrontEnd App</h1>  
+        <h1>Testing FrontEnd App</h1>
+        <BookList />
     </div>
   );
 }
