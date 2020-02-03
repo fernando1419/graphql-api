@@ -4,7 +4,8 @@ import { getBooksQuery } from '../queries/queries';
 
 function displayBooks(props) {
     var data = props.data;
-    console.log(data);
+    // console.log(data);
+    
     if (data.loading) {
         return ( <div>Loading books...</div> );
     } 
