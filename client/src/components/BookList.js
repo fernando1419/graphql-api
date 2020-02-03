@@ -1,6 +1,7 @@
 import React from 'react';
 import { graphql } from 'react-apollo';
 import { getBooksQuery } from '../queries/queries';
+import BookDetails from './BookDetails';
 
 function displayBooks(props) {
     var data = props.data;
@@ -8,11 +9,12 @@ function displayBooks(props) {
     
     if (data.loading) {
         return ( <div>Loading books...</div> );
-    } 
+    } else {
+        return data.books.map(function(book){
+            return (<li key={book.id} > { book.name } </li>);
+        });
+    }
     
-    return data.books.map(function(book){
-        return (<li key={book.id} > { book.name } </li>);
-    });
 }
 
 function BookList(props) {
@@ -21,6 +23,7 @@ function BookList(props) {
             <ul id="book-list">
                 { displayBooks(props) }
             </ul>
+            <BookDetails />
         </div>
     );
 }
