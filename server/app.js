@@ -1,18 +1,24 @@
 const express = require('express');
+const dotenv = require('dotenv');
 const graphqlHTTP = require('express-graphql');
 const schema = require('./schema/schema');
 const mongoose = require('mongoose');
 const cors = require('cors');
 
 const app = express();
+dotenv.config(); // use environment helpers.
+
+const port = process.env.port || 4000;
 
 // allow cross-origin requests
 app.use(cors());
 
 // connect to MongoDB Atlas.
-mongoose.connect("mongodb+srv://dbMongoUser:dbMongoPassword@cluster0-axqhf.mongodb.net/test?retryWrites=true&w=majority", { 
+const mongoDBUri = process.env.ATLAS_MONGODB_URI;
+mongoose.connect(mongoDBUri, { 
     useNewUrlParser: true, 
-    useUnifiedTopology: true
+    useUnifiedTopology: true,
+    useCreateIndex: true
 });                  
                   
 mongoose.connection.once('open', () => console.log('Connected to DB'));
@@ -23,7 +29,7 @@ app.use('/graphql', graphqlHTTP({
     graphiql: true
 }));
 
-app.listen(4000, () => {
-    console.log('Listening on requests on port 4000');
+app.listen(port, () => {
+    console.log(`Listening on requests on port ${port}`);
 });
 
